@@ -19,12 +19,17 @@ var currentDate = $('.currentDate');
 var currentTime = $('.currentTime');
 var historyBox = $('#historyBox');
 var savedCity = cityInput.val();
+var historyBtn = $('.historyBtn');
 
 
 searchBtn.click(function () {
     getWeatherByCity();
-    addHistory(cityInput.val);
+    addHistory(cityInput.val());
 });
+
+function getSavedHistory() {
+    return JSON.parse(localStorage.getItem('history')) || [];
+}
 
 function fillDate() {
     currentDate.text(date);
@@ -70,25 +75,30 @@ function getLocation() {
     })
 }
 
-// function buildButtons () {
-//     var historyBox = $('.historyBox');
+function addHistory(cityName) {
 
+    var history = getSavedHistory();
 
-// }
+    if (!history.includes(cityName)) {
+        history.push(cityName);
 
-// function addHistory() {
-//     function (historyBoxData) {
-//         var historyBox = $('.historyBox');
+        localStorage.setItem("history", JSON.stringify(history));
+        
+        historyBox.append(`
+                <button class="btn btn-secondary historyBtn">${cityName}</button>
+                `);
+    }
+}
 
-//         for (var eventObj of historyBoxData.length) {
+function outputCityHistory() {
+    var history = getSavedHistory();
 
-//             historyBox.append(`
-//             <button class="btn btn-secondary historyBtn">${eventObj.val()}</button>
-//             `);
-//         }
-//     })
-//     // citySaved = localStorage.setItem("cityInput", cityInput.val());
-// }
+    for (var city of history) {
+        historyBox.append(`
+                <button class="btn btn-secondary historyBtn">${city}</button>
+                `);
+    }
+}
 
 function getSavedWeather() {
     $.get(url + '&q=' + historyBtn).then(function (cityData) {
@@ -121,6 +131,8 @@ function getSavedWeather() {
         }
     });
 }
+
+// If statement to determine whether input is search bar or history button (eventObj)
 
 function getWeatherByCity() {
     $.get(url + '&q=' + cityInput.val()).then(function (cityData) {
@@ -156,3 +168,4 @@ function getWeatherByCity() {
 
 getLocation();
 fillDate();
+outputCityHistory()
