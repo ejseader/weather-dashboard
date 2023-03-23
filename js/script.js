@@ -18,11 +18,12 @@ var time = dayjs().format('h' + ':' + 'mm A');
 var currentDate = $('.currentDate');
 var currentTime = $('.currentTime');
 var historyBox = $('#historyBox');
+var savedCity = cityInput.val();
 
 
 searchBtn.click(function () {
     getWeatherByCity();
-    // addHistory()
+    addHistory(cityInput.val);
 });
 
 function fillDate() {
@@ -48,11 +49,11 @@ function getLocation() {
         });
         $.get(fiveDayURL + '&lat=' + locationData.coords.latitude + '&lon=' + locationData.coords.longitude).then(function (fiveDayData) {
 
-        var fiveDayOutput = $('#fiveDayOutput');
+            var fiveDayOutput = $('#fiveDayOutput');
 
-        for (var hourObj of fiveDayData.list) {
-            var iconCode = hourObj.weather[0].icon + '.png';
-            fiveDayOutput.append(`
+            for (var hourObj of fiveDayData.list) {
+                var iconCode = hourObj.weather[0].icon + '.png';
+                fiveDayOutput.append(`
                 <div class="col fiveDayHourlyOutput">
                     <img id="currentIcon" src="${baseIconURL + iconCode}" />
                     <div class="weatherData">
@@ -65,37 +66,32 @@ function getLocation() {
             `);
             }
         });
-         
+
     })
 }
 
-// function getHistory(date, savedCity) {
-//     var citySaved = JSON.parse(localStorage.getItem(date, savedCity));
+// function buildButtons () {
+//     var historyBox = $('.historyBox');
 
-//         historyBtn.click(showHistory());
-//     }
+
 // }
 
 // function addHistory() {
-//     localStorage.setItem(date, JSON.stringify(savedCity));
-
-//     for (eventObj of localStorage.length) {
-//         var historyBtn = eventObj.citySaved;
+//     function (historyBoxData) {
 //         var historyBox = $('.historyBox');
 
-//         historyBox.append(`
-//         <button class="btn btn-secondary historyBtn">${historyBtn}</button>
-//         `)
+//         for (var eventObj of historyBoxData.length) {
 
-//         historyBtn.click(getHistory());
-//     }
-
-    
-//     getHistory(date, savedCity);
+//             historyBox.append(`
+//             <button class="btn btn-secondary historyBtn">${eventObj.val()}</button>
+//             `);
+//         }
+//     })
+//     // citySaved = localStorage.setItem("cityInput", cityInput.val());
 // }
 
-function getWeatherByCity() {
-    $.get(url + '&q=' + cityInput.val()).then(function (cityData) {
+function getSavedWeather() {
+    $.get(url + '&q=' + historyBtn).then(function (cityData) {
         var tempRounded = Math.round(cityData.main.temp);
         cityName.text(cityData.name);
         currentTemp.text(tempRounded);
@@ -104,14 +100,9 @@ function getWeatherByCity() {
         humidity.text(cityData.main.humidity);
         currentDescription.text(cityData.weather[0].description);
         scrollCond.text(cityData.weather[0].description);
+    });
+    $.get(fiveDayURL + '&q=' + cityInput.val()).then(function (fiveDayData) {
 
-        console.log(cityData);
-    })
-}
-
-function getFiveDay() {
-    $.get(fiveDayURL + '&q=' + cityInput.value).then(function (fiveDayData) {
-        
         var fiveDayOutput = $('#fiveDayOutput');
 
         for (var hourObj of fiveDayData.list) {
@@ -127,9 +118,41 @@ function getFiveDay() {
                     </div>
                 </div>
             `);
-            }
-        });
-    }
+        }
+    });
+}
+
+function getWeatherByCity() {
+    $.get(url + '&q=' + cityInput.val()).then(function (cityData) {
+        var tempRounded = Math.round(cityData.main.temp);
+        cityName.text(cityData.name);
+        currentTemp.text(tempRounded);
+        scrollTemp.text(tempRounded);
+        wind.text(cityData.wind.speed);
+        humidity.text(cityData.main.humidity);
+        currentDescription.text(cityData.weather[0].description);
+        scrollCond.text(cityData.weather[0].description);
+    });
+    $.get(fiveDayURL + '&q=' + cityInput.val()).then(function (fiveDayData) {
+
+        var fiveDayOutput = $('#fiveDayOutput');
+
+        for (var hourObj of fiveDayData.list) {
+            var iconCode = hourObj.weather[0].icon + '.png';
+            fiveDayOutput.append(`
+                <div class="col fiveDayHourlyOutput">
+                    <img id="currentIcon" src="${baseIconURL + iconCode}" />
+                    <div class="weatherData">
+                        <h4>Temp: ${hourObj.main.temp}&deg;</h4>
+                        <h4>Wind: ${hourObj.wind.speed} mph</h4>
+                        <h4>Humidity: ${hourObj.main.humidity} &#37;</h4>
+                        <h6>Date and Time: ${hourObj.dt_txt}</h6>
+                    </div>
+                </div>
+            `);
+        }
+    });
+}
 
 getLocation();
 fillDate();
