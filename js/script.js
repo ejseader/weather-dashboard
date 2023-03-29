@@ -8,7 +8,7 @@ var cityName = $('.cityName');
 var currentTemp = $('.currentTemp');
 var scrollTemp = $('.scrollTemp');
 var scrollCond = $('.scrollCond');
-var wind = $('.wind');
+var wind = $('.wind');;
 var humidity = $('.humidity');
 var baseIconURL = 'https://openweathermap.org/img/wn/';
 var currentIcon = $('#currentIcon');
@@ -19,12 +19,11 @@ var currentDate = $('.currentDate');
 var currentTime = $('.currentTime');
 var historyBox = $('#historyBox');
 var savedCity = cityInput.val();
-var historyBtn = $('.historyBtn');
-
 
 searchBtn.click(function () {
     getWeatherByCity();
     addHistory(cityInput.val());
+    console.log(searchBtn);
 });
 
 function getSavedHistory() {
@@ -100,8 +99,8 @@ function outputCityHistory() {
     }
 }
 
-function getSavedWeather() {
-    $.get(url + '&q=' + historyBtn).then(function (cityData) {
+function getSavedWeather(thisBtn) {
+    $.get(url + '&q=' + thisBtn).then(function (cityData) {
         var tempRounded = Math.round(cityData.main.temp);
         cityName.text(cityData.name);
         currentTemp.text(tempRounded);
@@ -111,7 +110,7 @@ function getSavedWeather() {
         currentDescription.text(cityData.weather[0].description);
         scrollCond.text(cityData.weather[0].description);
     });
-    $.get(fiveDayURL + '&q=' + cityInput.val()).then(function (fiveDayData) {
+    $.get(fiveDayURL + '&q=' + thisBtn).then(function (fiveDayData) {
 
         var fiveDayOutput = $('#fiveDayOutput');
 
@@ -169,3 +168,13 @@ function getWeatherByCity() {
 getLocation();
 fillDate();
 outputCityHistory()
+
+var historyBtn = $('.historyBtn');
+
+console.log(historyBtn);
+
+historyBtn.each(function () {
+    $(this).click(function () {
+        getSavedWeather($(this).text());
+    });
+});
