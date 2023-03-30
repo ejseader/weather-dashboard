@@ -156,12 +156,12 @@ footer {
 
 @media (max-width: 600px) {
     .findYourCity {
-        font-size: 0.7rem;;
+        font-size: 7px;
     }
 
     .citySearch {
-        height: 1.5rem;
-        font-size: 0.8rem;
+        height: 20px;
+        font-size: 9px;
     }
 
     #currentWeather h1 {
@@ -169,11 +169,11 @@ footer {
     }
 
     .weatherParams h3 {
-        font-size: 1rem;
+        font-size: 12px;
     }
 
     .weatherData h3 {
-        font-size: 1rem;
+        font-size: 12px;
     }
     
     #fiveDay h1 {
@@ -234,11 +234,11 @@ footer {
     }
 
     .historyBtn {
-        font-size: 0.8rem;
+        font-size: 10px;
     }
 
     .searchHistory {
-        font-size: 0.8rem;
+        font-size: 10px;
     }
 
     .fiveDayHourlyOutput {
@@ -246,10 +246,14 @@ footer {
     }
 
     .weatherData h5 {
-        font-size: 1rem;
+        font-size: 10px;
     }
 
     .weatherData h6 {
-        font-size: 0.8rem;
+        font-size: 8px;
+    }
+
+    .montserrat-font {
+        font-size: 1.4rem;
     }
 }
