@@ -120,9 +120,9 @@ function getSavedWeather(thisBtn) {
                 <div class="col fiveDayHourlyOutput">
                     <img id="currentIcon" src="${baseIconURL + iconCode}" />
                     <div class="weatherData">
-                        <h4>Temp: ${hourObj.main.temp}&deg;</h4>
-                        <h4>Wind: ${hourObj.wind.speed} mph</h4>
-                        <h4>Humidity: ${hourObj.main.humidity} &#37;</h4>
+                        <h5>Temp: ${hourObj.main.temp}&deg;</h4>
+                        <h5>Wind: ${hourObj.wind.speed} mph</h4>
+                        <h5>Humidity: ${hourObj.main.humidity} &#37;</h4>
                         <h6>Date and Time: ${hourObj.dt_txt}</h6>
                     </div>
                 </div>

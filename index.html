@@ -21,7 +21,7 @@
           </nav>
           <div class="weather-scroll">
             <div id="scroll-text">
-                <h3>|| <span class="currentDate">Monday, March 20, 2023</span> || <span class="currentTime">9:30 PM</span> || It is currently <span class="scrollTemp"></span>&deg; with <span class="scrollCond"></span></h3>
+                <h3>|| <span class="currentDate"></span> || <span class="currentTime"></span> || It is currently <span class="scrollTemp"></span>&deg; <span id="scroll-cond">with <span class="scrollCond"></span></span></h3>
                 </div>
             </div>
     </header>
@@ -29,12 +29,12 @@
         <div class="row">
             <div class="col-3">
                 <h1 class="findYourCity"><i class="bi bi-house"></i> Find Your City...</h1>
-                <textarea placeholder="New York" class="citySearch"></textarea>
+                <textarea placeholder="Type City" class="citySearch" rows="1"></textarea>
                 <div class="d-grid">
                 <button id="searchBtn" class="btn btn-primary btn-block">Search</button>
                 </div>
                 <hr />
-                <p>Search History...</p>
+                <p class="searchHistory">Search History...</p>
                 <div id="historyBox" class="d-grid gap-2"></div>
             </div>
             <div class="col-9">
@@ -42,16 +42,16 @@
                     <h1 >Currently in <span class="cityName text-primary"></span>...</h1>
                     <div class="currentlyBox">
                         <div class="row">
-                            <div class="col-2 currentIconBox">
+                            <div class="col currentIconBox">
                                 <img id="currentIcon" src="" />
                             </div>
-                            <div class="col-2 weatherParams">
+                            <div class="col weatherParams">
                                 <h3>Temperature: </h3>
                                 <h3>Conditions: </h3>
                                 <h3>Wind: </h3>
                                 <h3>Humidity: </h3>
                             </div>
-                            <div class="col-8 weatherData">
+                            <div class="col weatherData">
                                 <h3><span class="currentTemp"></span>&deg;</h3>
                                 <h3><span class="currentDescription"></span></h3>
                                 <h3><span class="wind"></span> mph</h3>

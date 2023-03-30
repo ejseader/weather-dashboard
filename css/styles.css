@@ -153,3 +153,103 @@ footer a {
 footer {
     padding: 0 2%!important;
 }
+
+@media (max-width: 600px) {
+    .findYourCity {
+        font-size: 0.7rem;;
+    }
+
+    .citySearch {
+        height: 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    #currentWeather h1 {
+        font-size: 1.2rem;
+    }
+
+    .weatherParams h3 {
+        font-size: 1rem;
+    }
+
+    .weatherData h3 {
+        font-size: 1rem;
+    }
+    
+    #fiveDay h1 {
+        font-size: 1rem;
+    }
+
+    .currentIcon {
+        align-items: center;
+        text-align: center;
+    }
+
+    .weather-scroll {
+        height: 1.5rem;
+    }
+
+    #scroll-text h3 {
+        font-size: 1.2rem;
+        width: 200%;
+    }
+
+    #scroll-text {
+        -moz-transform: translateX(110%);
+        -webkit-transform: translateX(110%);
+        transform: translateX(110%);
+
+        -moz-animation: my-animation 32s linear infinite;
+        -webkit-animation: my-animation 32s linear infinite;
+        animation: my-animation 32s linear infinite;
+  }
+  
+  /* for Firefox */
+  @-moz-keyframes my-animation {
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(-110%); }
+  }
+  
+  /* for Chrome */
+  @-webkit-keyframes my-animation {
+    from { -webkit-transform: translateX(100%); }
+    to { -webkit-transform: translateX(-110%); }
+  }
+  
+  @keyframes my-animation {
+    from {
+      -moz-transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    to {
+      -moz-transform: translateX(-110%);
+      -webkit-transform: translateX(-110%);
+      transform: translateX(-110%);
+    }
+    }
+
+    #scroll-cond {
+        display: none;
+    }
+
+    .historyBtn {
+        font-size: 0.8rem;
+    }
+
+    .searchHistory {
+        font-size: 0.8rem;
+    }
+
+    .fiveDayHourlyOutput {
+        max-width: 60px;
+    }
+
+    .weatherData h5 {
+        font-size: 1rem;
+    }
+
+    .weatherData h6 {
+        font-size: 0.8rem;
+    }
+}
